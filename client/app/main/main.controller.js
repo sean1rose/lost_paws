@@ -2,26 +2,29 @@
 
 angular.module('lostPawsApp')
   .controller('MainCtrl', function ($scope, $http, socket) {
-    $scope.awesomeThings = [];
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-      socket.syncUpdates('thing', $scope.awesomeThings);
+    $scope.foundPets = {};
+    // $scope.foundpets = [];
+
+    $http.get('/api/pets').success(function(foundPets){
+      $scope.foundPets = foundPets;
+      socket.syncUpdates('pet', $scope.foundPets);
     });
 
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
+    $scope.addPet = function(){
+      if($scope.newPet === ''){
         return;
       }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
+      $http.post('/api/pets', { name: $scope.foundPet.name, type: $scope.foundPet.type, color: $scope.foundPet.color, addressFound: $scope.foundPet.address });
+      $scope.newPet = '';
     };
 
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
+    $scope.deletePet = function(pet){
+      $http.delete('/api/pets/' + pet._id);
     };
 
-    $scope.$on('$destroy', function () {
-      socket.unsyncUpdates('thing');
-    });
+    $scope.$on('$destroy', function(){
+      socket.unsyncUpdates('pet');
+    })
+
   });
