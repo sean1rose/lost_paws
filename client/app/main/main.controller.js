@@ -25,6 +25,27 @@ angular.module('lostPawsApp')
 
     $scope.$on('$destroy', function(){
       socket.unsyncUpdates('pet');
-    })
+    });
+
+    // google maps 
+    $scope.map = {
+      center: {
+        latitude: 37.7833,
+        longitude: -122.4167
+      },
+      zoom: 15
+    };
+
+    // create list of markers to use w/ ng-repeat
+    $scope.markerList = [
+      {
+        latitude: 45,
+        longitude: -73
+      },
+      {
+        latitude: 46,
+        longitude: -74
+      }
+    ]
 
   });
