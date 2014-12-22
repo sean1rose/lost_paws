@@ -4,7 +4,6 @@
   <div class="container">
     <h1>Lost Paws</h1>
     <p class="lead">Your Neighborhood Lost and Pound</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
   </div>
 </header>
 
@@ -12,24 +11,36 @@
   <div class="row">
     <div class="col-lg-12">
       <h1 class="page-header">Pets:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="pet in foundPets">
+      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="pet in foundPets | filter: nameFilter">
         <li><a href="#" tooltip="{{pet.info}}">{{pet.name}} / {{pet.type}} / {{pet.color}} / {{pet.address}}<button type="button" class="close" ng-click="deletePet(pet)">&times;</button></a></li>
       </ul>
     </div>
   </div>
 
-  <form class="pet-form" name="FoundPetForm">
-    <label>Enter Found Pet Name</label>
-    <p class="input-group">
-      <input type="text" class="form-control" placeholder="Pet's Name." name="petName" ng-model="foundPet.name">
-      <input type="text" class="form-control" placeholder="Type of Pet / Breed" name="petType" ng-model="foundPet.type">
-      <input type="text" class="form-control" placeholder="Color" name="petColor" ng-model="foundPet.color">
-      <input type="text" class="form-control" placeholder="Address Pet Found." name="petAddress" ng-model="foundPet.address">
-      <div class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="addPet()">Add New</button>
-      </div>
-    </p>
-  </form>  
+  
+  <div class="col-lg-12">
+    <div class="col-lg-6">
+      <form class="pet-form" name="FoundPetForm">
+        <label>Enter Found Pet Name</label>
+        <p class="input-group">
+          <input type="text" class="form-control" placeholder="Pet's Name." name="petName" ng-model="foundPet.name">
+          <input type="text" class="form-control" placeholder="Type of Pet / Breed" name="petType" ng-model="foundPet.type">
+          <input type="text" class="form-control" placeholder="Color" name="petColor" ng-model="foundPet.color">
+          <input type="text" class="form-control" placeholder="Address Pet Found." name="petAddress" ng-model="foundPet.address">
+        </p>
+        <div class="input-group-btn">
+          <button type="submit" class="btn btn-primary" ng-click="addPet()">Add New</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="col-lg-12">
+    <div class="form-group col-lg-4">
+      <input type="text" class="form-control floating-label" ng-model="nameFilter" placeholder="Filter...">
+    </div>
+  </div>
+
 </div>
 
 <footer class="footer">
