@@ -12,11 +12,14 @@ angular.module('lostPawsApp')
     });
 
     $scope.addPet = function(){
-      if($scope.newPet === ''){
+      if($scope.foundPet.name === ''){
         return;
       }
       $http.post('/api/pets', { name: $scope.foundPet.name, type: $scope.foundPet.type, color: $scope.foundPet.color, addressFound: $scope.foundPet.address });
-      $scope.newPet = '';
+      $scope.foundPet.name = '';
+      $scope.foundPet.type = '';
+      $scope.foundPet.color = '';
+      $scope.foundPet.address = '';
     };
 
     $scope.deletePet = function(pet){
