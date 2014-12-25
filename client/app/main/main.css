@@ -16,12 +16,17 @@
 
 .footer {
     text-align: center;
-    padding: 30px 0;
+    padding: 10px 0;
     margin-top: 70px;
     border-top: 1px solid #E5E5E5;
 }
 
 .angular-google-map-container {
+    /*height: 500px;*/
+    /*width: 850px;*/
     height: 500px;
-    width: 850px;
+}
+
+#foundPetsHeader {
+    text-align: center;
 }

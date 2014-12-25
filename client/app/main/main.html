@@ -4,7 +4,7 @@
 
 <div class="container" id="everythingBelowNavbar">
   
-  <div class="col-md-3" id="leftVerticalColumn">
+<!--   <div class="col-md-3" id="leftVerticalColumn">
     <div class="panel panel-default" id="columnbox1">
       <div class="panel-body">
         <form class="pet-form" name="FoundPetForm">
@@ -39,9 +39,9 @@
         Fourth Box
       </div>
     </div>
-  </div> <!--id="leftVerticalColumn" -->
+  </div> --> <!--id="leftVerticalColumn" -->
 
-  <div class="container col-md-9" id="mainDisplay">
+  <div class="container" id="mainDisplay">
     <div class="row">
       <div class="col-lg-12">        
         <div class="container">
@@ -51,21 +51,37 @@
 
       </div>
     </div>
-
-    <br>
-
-    <div class="row col-md-12" id="petsFilter">
-      <div class="form-group">
-        <h1 class="page-header">Pets:</h1>
-        <input type="text" class="form-control floating-label" ng-model="nameFilter" placeholder="Filter...">
-      </div>
-    </div>
     
-    <div class="row col-md-12" id="petsLabel">
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="pet in foundPets | filter: nameFilter">
-        <li><a href="#" tooltip="{{pet.info}}">{{pet.name}} / {{pet.type}} / {{pet.color}} / {{pet.address}}<button type="button" class="close" ng-click="deletePet(pet)">&times;</button></a></li>
-      </ul>
-    </div>
+    <div class="container col-md-12" id="petsTable">
+      <div class="container row col-md-6 col-md-offset-3">
+        <div id="foundPetsHeader">
+          <h1 class="page-header">Found Pets</h1>
+        </div>
+        <div id="foundPetsFilter">
+          <input type="text" class="form-control floating-label" ng-model="nameFilter" placeholder="Filter by Keyword...">
+        </div>
+        <br>
+      </div>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Pet Name</th>
+            <th>Type of Pet</th>
+            <th>Color of Pet</th>
+            <th>Address Found</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="pet in foundPets | filter: nameFilter"> <!--use ng-repeat here. -->
+            <td>{{pet.name}}</td>
+            <td>{{pet.type}}</td>
+            <td>{{pet.color}}</td>
+            <td>{{pet.address}}</td>          
+          </tr>
+        </tbody>
+      </table>    
+    </div> <!--container -->
+
   </div> <!--id="mainDisplay"-->
 
 </div> <!--id="everythingBelowNavbar"-->
