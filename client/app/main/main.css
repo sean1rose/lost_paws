@@ -30,3 +30,7 @@
 #foundPetsHeader {
     text-align: center;
 }
+
+#findPetForm {
+    display: inline;
+}
