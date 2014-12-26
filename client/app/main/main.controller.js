@@ -4,12 +4,15 @@ angular.module('lostPawsApp')
   .controller('MainCtrl', function ($scope, $http, socket) {
 
     $scope.foundPets = {};
-    // $scope.foundpets = [];
     $scope.mapData = {};
     $scope.formInfo = {};
+    $scope.options = {
+      scrollwheel: false
+    }
 
     $http.get('/api/pets').success(function(foundPets){
       $scope.foundPets = foundPets;
+      console.log('items in database ', $scope.foundPets);
       socket.syncUpdates('pet', $scope.foundPets);
     });
 
@@ -38,10 +41,11 @@ angular.module('lostPawsApp')
         latitude: 37.7833,
         longitude: -122.4167
       },
-      zoom: 15
+      zoom: 15,
+      bounds: {}
     };
 
-    // want to adjust $scope.map upon clicking Find Pet
+    // model for find pet search box (user inputs address/zip and map centers to that location)
     $scope.findPet = function(){
       // need to get input and add to get request
       var convertToUrl = function(inputLocation){
@@ -51,8 +55,11 @@ angular.module('lostPawsApp')
         var httpAddress = 'http://maps.google.com/maps/api/geocode/json?address=' + joined + '&sensor=false';
         return httpAddress;        
       };
+
       var convertedUrl = convertToUrl($scope.formInfo.location);
+      $scope.formInfo.location = '';
       console.log('Here: ', convertedUrl);
+
       $http.get(convertedUrl).success(function(mapData) {
         console.log(mapData);
         var ladder = mapData.results[0].geometry.location.lat; 
@@ -68,16 +75,81 @@ angular.module('lostPawsApp')
       });
     };
 
-    // create list of markers to use w/ ng-repeat
-    $scope.markerList = [
-      {
-        latitude: 45,
-        longitude: -73
-      },
-      {
-        latitude: 46,
-        longitude: -74
-      }
-    ]
+    $scope.petMarkers = [];
+    $http.get('/api/pets').success(function(foundPets){
+      $scope.foundPets = foundPets;
+      var listOfPets = $scope.foundPets;
+      console.log('list! ', listOfPets);
+      var markerCreator = function(arrayOfPets){
+        console.log('markerCreator is called! arrayOfPets is - ', arrayOfPets);
+        for (var i = 0; i < arrayOfPets.length; i++){
+          // object w/ addressFound prop
+          var singlePet = arrayOfPets[i];
+          var petName = arrayOfPets[i].name;
+          var identity = singlePet._id;
+          console.log('in the for loop, ID is ', identity);
+          var location = singlePet.addressFound;
+          var split = location.split(' ');
+          var joined = split.join('+');
+          var httpAddress = 'http://maps.google.com/maps/api/geocode/json?address=' + joined + '&sensor=false';
+          console.log('in the for loop! httpaddress is!!!! ', httpAddress);
+          $http.get(httpAddress).success(function(mapDataAgain){
+            console.log('mapDataAgain IS ', mapDataAgain);
+            var ladder = mapDataAgain.results[0].geometry.location.lat; 
+            console.log('ladder IS ', ladder);
+            var longer = mapDataAgain.results[0].geometry.location.lng;
+            var obj = {
+              latitude: ladder,
+              longitude: longer,
+              title: petName,
+              id: i
+            };
+            $scope.$watch(function(){
+              console.log('we are in scope.watch');
+              return $scope.map.bounds;
+            }, function(){
+              var markers = [];
+              markers.push(obj);
+              $scope.petMarkers = markers;
+            }, true);
+          });
+        };
+      };
+      markerCreator(listOfPets);
+    });
+    // iterate thru $scope.foundPets (array of objects --> objectName.addressFound)
+    // take each foundPets.addressFound --> convert to lat/long
+    // run thru marker
+
+    // var latConverter = function(inputLocation){
+    //   var location = inputLocation;
+    //   var split = location.split(' ');
+    //   var joined = split.join('+');
+    //   var httpAddress = 'http://maps.google.com/maps/api/geocode/json?address=' + joined + '&sensor=false';
+    //   $http.get(httpAddress).success(function(mapDataAgain){
+    //     console.log('mapDataAgain IS ', mapDataAgain);
+    //     var ladder = mapDataAgain.results[0].geometry.location.lat; 
+    //     console.log('ladder IS ', ladder);
+    //     var longer = mapDataAgain.results[0].geometry.location.lng;
+    //   });
+    // };
+
+    // latConverter('505 SunnyhillWay, Anaheim CA 92808');
+
+    // var listOfPets = $scope.foundPets;
+    // // marker time
+    // $scope.petMarkers = [];
+
+    // $scope.$watch(function() {
+    //   return $scope.map.bounds;
+    // }, function(nv, ov){
+    //   if (!ov.southwest && nv.southwest){
+    //     var markers = [];
+    //     for (var i = 0; i < listOfPets.length; i++){
+    //       markers.push(latConverter(listOfPets[i].addressFound));
+    //     }
+    //     $scope.petMarkers = markers;
+    //   }
+    // }, true);
 
   });
