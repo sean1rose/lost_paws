@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lostPawsApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
+  .controller('MainCtrl', function ($scope, $http, socket, gMapFactory) {
 
     $scope.foundPets = {};
     $scope.mapData = {};
@@ -48,6 +48,7 @@ angular.module('lostPawsApp')
     // model for find pet search box (user inputs address/zip and map centers to that location)
     $scope.findPet = function(){
       // need to get input and add to get request
+      
       var convertToUrl = function(inputLocation){
         var location = inputLocation;
         var split = location.split(' ');
@@ -76,10 +77,12 @@ angular.module('lostPawsApp')
     };
 
     $scope.petMarkers = [];
+
     $http.get('/api/pets').success(function(foundPets){
       $scope.foundPets = foundPets;
       var listOfPets = $scope.foundPets;
       console.log('list! ', listOfPets);
+
       var markerCreator = function(arrayOfPets){
         console.log('markerCreator is called! arrayOfPets is - ', arrayOfPets);
 
@@ -87,26 +90,22 @@ angular.module('lostPawsApp')
           var singlePet = item;
           var petName = singlePet.name;
           var petType = singlePet.type;
-          var location = singlePet.addressFound;
-          var split = location.split(' ');
-          var joined = split.join('+');
-          var httpAddress = 'http://maps.google.com/maps/api/geocode/json?address=' + joined + '&sensor=false';
-
-          $http.get(httpAddress).success(function(mapDataAgain){
-            console.log('index is currently ---> ', index);
-            console.log('mapDataAgain IS ', mapDataAgain);
-            var ladder = mapDataAgain.results[0].geometry.location.lat; 
-            console.log('ladder IS ', ladder);
-            var longer = mapDataAgain.results[0].geometry.location.lng;
+          var location = singlePet.addressFound
+          
+          // incorporate factory
+          gMapFactory.setAddress(location);
+          gMapFactory.callGMaps().then(function(data){
+            var petLatitude = data.results[0].geometry.location.lat;
+            var petLongitude = data.results[0].geometry.location.lng;
             var obj = {
-              latitude: ladder,
-              longitude: longer,
+              latitude: petLatitude,
+              longitude: petLongitude,
               title: petName,
               title2: petType,
               id: index,
               show: false,
               onClick: function(){
-                console.log("Clicked!");
+                console.log("Clicked");
                 obj.show = !obj.show;
               }
             };
@@ -125,39 +124,5 @@ angular.module('lostPawsApp')
       };
       markerCreator(listOfPets);
     });
-    // iterate thru $scope.foundPets (array of objects --> objectName.addressFound)
-    // take each foundPets.addressFound --> convert to lat/long
-    // run thru marker
-
-    // var latConverter = function(inputLocation){
-    //   var location = inputLocation;
-    //   var split = location.split(' ');
-    //   var joined = split.join('+');
-    //   var httpAddress = 'http://maps.google.com/maps/api/geocode/json?address=' + joined + '&sensor=false';
-    //   $http.get(httpAddress).success(function(mapDataAgain){
-    //     console.log('mapDataAgain IS ', mapDataAgain);
-    //     var ladder = mapDataAgain.results[0].geometry.location.lat; 
-    //     console.log('ladder IS ', ladder);
-    //     var longer = mapDataAgain.results[0].geometry.location.lng;
-    //   });
-    // };
-
-    // latConverter('505 SunnyhillWay, Anaheim CA 92808');
-
-    // var listOfPets = $scope.foundPets;
-    // // marker time
-    // $scope.petMarkers = [];
-
-    // $scope.$watch(function() {
-    //   return $scope.map.bounds;
-    // }, function(nv, ov){
-    //   if (!ov.southwest && nv.southwest){
-    //     var markers = [];
-    //     for (var i = 0; i < listOfPets.length; i++){
-    //       markers.push(latConverter(listOfPets[i].addressFound));
-    //     }
-    //     $scope.petMarkers = markers;
-    //   }
-    // }, true);
 
   });
