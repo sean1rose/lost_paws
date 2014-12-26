@@ -86,6 +86,7 @@ angular.module('lostPawsApp')
         arrayOfPets.forEach(function(item, index, array){
           var singlePet = item;
           var petName = singlePet.name;
+          var petType = singlePet.type;
           var location = singlePet.addressFound;
           var split = location.split(' ');
           var joined = split.join('+');
@@ -101,7 +102,13 @@ angular.module('lostPawsApp')
               latitude: ladder,
               longitude: longer,
               title: petName,
-              id: index
+              title2: petType,
+              id: index,
+              show: false,
+              onClick: function(){
+                console.log("Clicked!");
+                obj.show = !obj.show;
+              }
             };
             $scope.$watch(function(){
               console.log('we are in scope.watch');
