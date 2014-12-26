@@ -82,18 +82,17 @@ angular.module('lostPawsApp')
       console.log('list! ', listOfPets);
       var markerCreator = function(arrayOfPets){
         console.log('markerCreator is called! arrayOfPets is - ', arrayOfPets);
-        for (var i = 0; i < arrayOfPets.length; i++){
-          // object w/ addressFound prop
-          var singlePet = arrayOfPets[i];
-          var petName = arrayOfPets[i].name;
-          var identity = singlePet._id;
-          console.log('in the for loop, ID is ', identity);
+
+        arrayOfPets.forEach(function(item, index, array){
+          var singlePet = item;
+          var petName = singlePet.name;
           var location = singlePet.addressFound;
           var split = location.split(' ');
           var joined = split.join('+');
           var httpAddress = 'http://maps.google.com/maps/api/geocode/json?address=' + joined + '&sensor=false';
-          console.log('in the for loop! httpaddress is!!!! ', httpAddress);
+
           $http.get(httpAddress).success(function(mapDataAgain){
+            console.log('index is currently ---> ', index);
             console.log('mapDataAgain IS ', mapDataAgain);
             var ladder = mapDataAgain.results[0].geometry.location.lat; 
             console.log('ladder IS ', ladder);
@@ -102,18 +101,20 @@ angular.module('lostPawsApp')
               latitude: ladder,
               longitude: longer,
               title: petName,
-              id: i
+              id: index
             };
             $scope.$watch(function(){
               console.log('we are in scope.watch');
               return $scope.map.bounds;
             }, function(){
               var markers = [];
-              markers.push(obj);
-              $scope.petMarkers = markers;
+              //markers.push(obj);
+              $scope.petMarkers.push(obj);
+              //$scope.petMarkers = markers;
+              console.log('markers = ', $scope.petMarkers);
             }, true);
           });
-        };
+        });
       };
       markerCreator(listOfPets);
     });
