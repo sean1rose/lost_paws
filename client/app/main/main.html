@@ -56,7 +56,15 @@
 
       <div class="container" id="actualMapCanvas">
         <ui-gmap-google-map center="map.center" zoom="16" options="options">
-          <ui-gmap-markers models="petMarkers" coords="'self'" icon="'icon'">
+          <ui-gmap-markers models="petMarkers" coords="'self'" icon="'icon'" click="'onClick'">
+            <ui-gmap-windows show="show">
+              <div ng-non-bindable>
+              <p><strong><h3>{{title}}</h3></strong></p>
+              <p>Type: {{title2}}</p>
+              <p>Found By: </p>
+              <p>@: </p>
+              </div>
+            </ui-gmap-windows>
           </ui-gmap-markers>
         </ui-gmap-google-map>
       </div>
