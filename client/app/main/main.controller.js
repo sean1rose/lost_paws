@@ -47,51 +47,35 @@ angular.module('lostPawsApp')
 
     // model for find pet search box (user inputs address/zip and map centers to that location)
     $scope.findPet = function(){
-      // need to get input and add to get request
-      
-      var convertToUrl = function(inputLocation){
-        var location = inputLocation;
-        var split = location.split(' ');
-        var joined = split.join('+');
-        var httpAddress = 'http://maps.google.com/maps/api/geocode/json?address=' + joined + '&sensor=false';
-        return httpAddress;        
-      };
-
-      var convertedUrl = convertToUrl($scope.formInfo.location);
+      var location = $scope.formInfo.location;
       $scope.formInfo.location = '';
-      console.log('Here: ', convertedUrl);
-
-      $http.get(convertedUrl).success(function(mapData) {
-        console.log(mapData);
-        var ladder = mapData.results[0].geometry.location.lat; 
-        var longer = mapData.results[0].geometry.location.lng;
-        console.log('lat-', ladder, 'long-', longer);
+      gMapFactory.setAddress(location);
+      gMapFactory.callGMaps().then(function(data){
+        var petLatitude = data.results[0].geometry.location.lat;
+        var petLongitude = data.results[0].geometry.location.lng;
         $scope.map = {
           center: {
-            latitude: ladder,
-            longitude: longer
+            latitude: petLatitude,
+            longitude: petLongitude
           },
           zoom: 15
-        }
+        };
       });
     };
 
     $scope.petMarkers = [];
-
+    // display each pet in database to map + add markers/windows
     $http.get('/api/pets').success(function(foundPets){
       $scope.foundPets = foundPets;
       var listOfPets = $scope.foundPets;
       console.log('list! ', listOfPets);
-
       var markerCreator = function(arrayOfPets){
         console.log('markerCreator is called! arrayOfPets is - ', arrayOfPets);
-
         arrayOfPets.forEach(function(item, index, array){
           var singlePet = item;
           var petName = singlePet.name;
           var petType = singlePet.type;
-          var location = singlePet.addressFound
-          
+          var location = singlePet.addressFound  
           // incorporate factory
           gMapFactory.setAddress(location);
           gMapFactory.callGMaps().then(function(data){
@@ -110,14 +94,10 @@ angular.module('lostPawsApp')
               }
             };
             $scope.$watch(function(){
-              console.log('we are in scope.watch');
               return $scope.map.bounds;
             }, function(){
               var markers = [];
-              //markers.push(obj);
               $scope.petMarkers.push(obj);
-              //$scope.petMarkers = markers;
-              console.log('markers = ', $scope.petMarkers);
             }, true);
           });
         });
