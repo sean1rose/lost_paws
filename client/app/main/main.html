@@ -47,8 +47,9 @@
 
         <div class="findPet">
           <form id="findPetForm" ng-submit="findPet()">
-            <input type="text" class="" ng-model="zipcode" placeholder="Enter Zip Code to Find Pet...">
+            <input type="text" class="" ng-model="formInfo.location" placeholder="Enter Address/Zip Code to Find Pet...">
             <input type="submit" class="btn btn-primary btn-sm" ng-click="findPet()">
+            <span>{{formInfo}}</span>
           </form>
         </div>
 

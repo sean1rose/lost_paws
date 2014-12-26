@@ -6,6 +6,7 @@ angular.module('lostPawsApp')
     $scope.foundPets = {};
     // $scope.foundpets = [];
     $scope.mapData = {};
+    $scope.formInfo = {};
 
     $http.get('/api/pets').success(function(foundPets){
       $scope.foundPets = foundPets;
@@ -42,7 +43,17 @@ angular.module('lostPawsApp')
 
     // want to adjust $scope.map upon clicking Find Pet
     $scope.findPet = function(){
-      $http.get('http://maps.google.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&sensor=false').success(function(mapData) {
+      // need to get input and add to get request
+      var convertToUrl = function(inputLocation){
+        var location = inputLocation;
+        var split = location.split(' ');
+        var joined = split.join('+');
+        var httpAddress = 'http://maps.google.com/maps/api/geocode/json?address=' + joined + '&sensor=false';
+        return httpAddress;        
+      };
+      var convertedUrl = convertToUrl($scope.formInfo.location);
+      console.log('Here: ', convertedUrl);
+      $http.get(convertedUrl).success(function(mapData) {
         console.log(mapData);
         var ladder = mapData.results[0].geometry.location.lat; 
         var longer = mapData.results[0].geometry.location.lng;
