@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lostPawsApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth, $http, socket, gMapFactory) {
     $scope.menu = [{
       'title': 'Home',
       'link': '/'

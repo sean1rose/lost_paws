@@ -11,6 +11,7 @@ angular.module('lostPawsApp')
 
     // _address = singlePet.addressFound
     var makeUrl = function(){
+      console.log('in makeUrl');
       _address = _address.split(' ').join('+');
       _finalUrl = baseUrl + _address + '&sensor=false';
       return _finalUrl;
@@ -26,9 +27,11 @@ angular.module('lostPawsApp')
     }
 
     geocodeService.callGMaps = function(){
+      console.log('in service + callGMaps');
       makeUrl();
       var deferred = $q.defer();
       $http.get(_finalUrl).success(function(data){
+        console.log('data is ', data);
         deferred.resolve(data);
       }).error(function(){
         deferred.reject('Error occurred!');
