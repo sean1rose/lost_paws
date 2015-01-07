@@ -3,8 +3,10 @@
 <br>
 
 <div class="container" id="everythingBelowNavbar">
-  
-<!--   <div class="col-md-3" id="leftVerticalColumn">
+
+<!--  COMMENTED OUT CODE ALLOWS USER TO ENTER NEW FOUND PET INTO DATABASE, WHICH THEN SHOWS UP ON MAP... -->
+<!--
+  <div class="col-md-3" id="leftVerticalColumn">
     <div class="panel panel-default" id="columnbox1">
       <div class="panel-body">
         <form class="pet-form" name="FoundPetForm">
@@ -94,7 +96,7 @@
             <td>{{pet.name}}</td>
             <td>{{pet.type}}</td>
             <td>{{pet.color}}</td>
-            <td>{{pet.address}}</td>
+            <td><h6>{{pet.address}}</h6></td>
             <td><button type="button" class="close" ng-click="deletePet(pet)">&times;</button></td>         
           </tr>
         </tbody>

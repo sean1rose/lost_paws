@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lostPawsApp')
-  .controller('MainCtrl', function ($scope, $http, socket, gMapFactory) {
+  .controller('MainCtrl', function ($scope, $http, socket, gMapFactory, $location) {
 
     $scope.foundPets = {};
     $scope.mapData = {};
@@ -25,6 +25,8 @@ angular.module('lostPawsApp')
       $scope.foundPet.type = '';
       $scope.foundPet.color = '';
       $scope.foundPet.address = '';
+      // redirect
+      $location.path('/')
     };
 
     $scope.deletePet = function(pet){
