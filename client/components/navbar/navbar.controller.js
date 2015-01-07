@@ -5,6 +5,10 @@ angular.module('lostPawsApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
+    },
+    {
+      'title': 'Found',
+      'link': '/found'
     }];
 
     $scope.isCollapsed = true;
