@@ -1,0 +1,77 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<br>
+
+<div class="container" id="everythingBelowNavbar">
+  <div class="container" id="mainDisplay">
+    <div class="row" id="petsMapArea">
+      <div class="col-lg-12" id="petSearch">
+        <div class="findPet container row col-md-6 col-md-offset-3">
+          <form id="findPetForm" ng-submit="findPet()">
+            <input type="text" class="form-control floating-label" ng-model="formInfo.location" placeholder="Enter Address/Zip Code to Find Your Lost Pet...">
+            <!-- <input type="submit" class="btn btn-primary btn-sm" ng-click="findPet()"> -->
+          </form>
+        </div> <!--class="findPet"-->
+      </div> <!--id="petSearch"-->
+
+      <br><br>
+
+      <div class="container" id="actualMapCanvas">
+        <ui-gmap-google-map center="map.center" zoom="16" options="options">
+          <ui-gmap-markers models="petMarkers" coords="'self'" icon="'icon'" click="'onClick'">
+            <ui-gmap-windows show="show">
+              <div ng-non-bindable>
+              <p><strong><h3>{{title}}</h3></strong></p>
+              <p>Type: {{title2}}</p>
+              <p>Found By: </p>
+              <p>@: </p>
+              </div>
+            </ui-gmap-windows>
+          </ui-gmap-markers>
+        </ui-gmap-google-map>
+      </div>
+    </div> <!--id="petsMapArea"-->
+    
+    <div class="container col-md-12" id="petsTable">
+      <div class="container row col-md-6 col-md-offset-3">
+        <div id="foundPetsHeader">
+          <h1 class="page-header">Found Pets</h1>
+        </div>
+        <div id="foundPetsFilter">
+          <input type="text" class="form-control floating-label" ng-model="nameFilter" ng-model-options="{debounce: 300}" placeholder="Filter by Keyword...">
+        </div>
+        <br>
+      </div>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Pet Name</th>
+            <th>Type of Pet</th>
+            <th>Color of Pet</th>
+            <th>Address Found</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="pet in foundPets | filter: nameFilter"> <!--use ng-repeat here. -->
+            <td>{{pet.name}}</td>
+            <td>{{pet.type}}</td>
+            <td>{{pet.color}}</td>
+            <td><h6>{{pet.address}}</h6></td>
+            <td><button type="button" class="close" ng-click="deletePet(pet)">&times;</button></td>         
+          </tr>
+        </tbody>
+      </table>    
+    </div> <!--container -->
+
+  </div> <!--id="mainDisplay"-->
+
+</div> <!--id="everythingBelowNavbar"-->
+
+
+<footer class="footer">
+  <div class="container">
+      <p>Lost Paws v0.1 |
+        <a href="http://www.seanrose.io">seanrose.io</a> |
+         <a href="https://github.com/sean1rose">Github</a></p>
+  </div>
+</footer>

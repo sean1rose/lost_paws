@@ -7,6 +7,10 @@ angular.module('lostPawsApp')
       'link': '/'
     },
     {
+      'title': 'Lost',
+      'link': '/lost'
+    },
+    {
       'title': 'Found',
       'link': '/found'
     }];
