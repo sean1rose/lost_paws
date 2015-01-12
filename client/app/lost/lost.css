@@ -1,0 +1,36 @@
+.thing-form {
+    margin: 20px 0;
+}
+
+#banner {
+    border-bottom: none;
+    margin-top: -20px;
+}
+
+#banner h1 {
+    font-size: 60px;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+
+.footer {
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 70px;
+    border-top: 1px solid #E5E5E5;
+}
+
+.angular-google-map-container {
+    /*height: 500px;*/
+    /*width: 850px;*/
+    height: 500px;
+}
+
+#foundPetsHeader {
+    text-align: center;
+}
+
+#findPetForm {
+    display: inline;
+}
