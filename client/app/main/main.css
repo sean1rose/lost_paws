@@ -109,8 +109,8 @@ hr.star-primary:after {
     }
 }
 
-.greyWell {
-    background-color: #f5f5f5;
+body .well, .container .well, .container-fluid .well, body .jumbotron, .container .jumbotron, .container-fluid .jumbotron, body .well-default, .container .well-default, .container-fluid .well-default, body .jumbotron-default, .container .jumbotron-default, .container-fluid .jumbotron-default {
+    background-color: #f5f5f5;   
 }
 
 .center {
@@ -131,6 +131,11 @@ hr.star-primary:after {
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     line-height: 18px;
     color: #478fca;
+}
+
+.list-inline > li {
+    padding-right: 25px;
+    padding-left: 25px;
 }
 
 .footer {
