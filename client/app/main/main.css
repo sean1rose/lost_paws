@@ -9,7 +9,7 @@ header {
 }
 
 header .container {
-    padding-top: 100px;
+    padding-top: 50px;
     padding-bottom: 50px;
 }
 
@@ -107,6 +107,35 @@ hr.star-primary:after {
     .intro-divider {
         width: 100%;
     }
+}
+
+body .well, .container .well, .container-fluid .well, body .jumbotron, .container .jumbotron, .container-fluid .jumbotron, body .well-default, .container .well-default, .container-fluid .well-default, body .jumbotron-default, .container .jumbotron-default, .container-fluid .jumbotron-default {
+    background-color: #f5f5f5;   
+}
+
+.center {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.fontTitle {
+    font-size: 20px;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 20px;
+    color: #009587;
+}
+
+.fontNormal {
+    font-size: 18px;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 18px;
+    color: #478fca;
+}
+
+.list-inline > li {
+    padding-right: 25px;
+    padding-left: 25px;
 }
 
 .footer {
