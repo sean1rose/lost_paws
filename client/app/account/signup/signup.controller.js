@@ -4,6 +4,7 @@ angular.module('lostPawsApp')
   .controller('SignupCtrl', function ($scope, Auth, $location, $window) {
     $scope.user = {};
     $scope.errors = {};
+    $scope.inputType = 'password';
 
     $scope.register = function(form) {
       $scope.submitted = true;
