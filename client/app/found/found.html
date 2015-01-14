@@ -29,12 +29,12 @@
 </div>
 
 <div class="container auth">
-    <h4 class="text-center titlefont">Enter Your Information so we can reconnect the pet you found with its rightful owner.</h4>
+    <h4 class="text-center titlefont">Find a Lost Pet? Enter the pet's info here so we can connect you with its rightful owner.</h4>
     <div id="big-form" class="well auth-box">
       <form class="pet-form" name="FoundPetForm">
         <fieldset>
 
-          <!-- Text input-->
+          <!-- Pet's Name-->
           <div class="form-group">
             <label class=" control-label" for="textinput">Pet's Name</label>  
             <div class="">
@@ -43,14 +43,44 @@
             </div>
           </div>
 
-          <!-- Password input-->
+          <!-- Pet Type/Breed-->
           <div class="form-group">
-            <label class=" control-label" for="passwordinput">Password</label>
+            <label class=" control-label" for="pettype">Pet Type/Breed</label>
             <div class="">
-              <input id="passwordinput" name="passwordinput" placeholder="Password" class="form-control input-md" type="password">
+              <input type="text" class="form-control" placeholder="Type of Pet/Breed" name="petType" ng-model="foundPet.type">
               <span class="help-block">help</span>
             </div>
           </div>
+
+          <!-- Pet Color-->
+          <div class="form-group">
+            <label class=" control-label" for="petcolor">Pet Color</label>
+            <div class="">
+              <input type="text" class="form-control" placeholder="Color of Pet" name="petColor" ng-model="foundPet.color">
+              <span class="help-block">help</span>
+            </div>
+          </div>
+
+          <!-- Pet Address-->
+          <div class="form-group">
+            <label class=" control-label" for="petcolor">Address Pet Was Found</label>
+            <div class="">
+              <input type="text" class="form-control" placeholder="Address Pet Found" name="petAddress" ng-model="foundPet.address">
+              <span class="help-block">help</span>
+            </div>
+          </div>
+
+          <!-- File Button for Uploading Picture of Found Pet --> 
+          <div class="form-group">
+            <label class=" control-label" for="filebutton">Avatar</label>
+            <div class="">
+              <input id="filebutton" name="filebutton" class="input-file" type="file">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" ng-click="addPet()">Add Found Pet</button>
+
+
 
           <!-- Select Basic -->
           <div class="form-group">
