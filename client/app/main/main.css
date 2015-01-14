@@ -48,7 +48,7 @@ header .intro-text .skills {
 
 hr.star-light,
 hr.star-primary {
-    margin: 25px auto 30px;
+    margin: 20px auto 45px;
     padding: 0;
     max-width: 250px;
     border: 0;
@@ -125,6 +125,7 @@ body .well, .container .well, .container-fluid .well, body .jumbotron, .containe
     line-height: 20px;
     color: #009587;
 }
+
 
 .fontNormal {
     font-size: 18px;
