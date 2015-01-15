@@ -17,7 +17,7 @@ angular.module('lostPawsApp')
         })
         .then( function() {
           // Account created, redirect to home
-          $location.path('/');
+          $location.path('/found');
         })
         .catch( function(err) {
           err = err.data;

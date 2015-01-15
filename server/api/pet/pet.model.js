@@ -8,6 +8,7 @@ var PetSchema = new Schema({
   type: String,
   color: String,
   addressFound: String,
+  dateFound: String,
   finder: {
     type: Schema.Types.ObjectId,
     ref: 'User'
