@@ -9,6 +9,7 @@ angular.module('lostPawsApp')
     },
     {
       'title': 'Found',
+      // but want to be able to tell if user is already signed-in --> if so, want to be able to go to found
       'link': '/found'
     }];
 
