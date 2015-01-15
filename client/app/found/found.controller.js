@@ -12,7 +12,7 @@ angular.module('lostPawsApp')
       $scope.foundPet.color = '';
       $scope.foundPet.address = '';
       $scope.foundPet.dateFound = '';
-      $location.path('/')
+      $location.path('/lost')
     };
 
     // want to make sure that the currently-logged-in user's info is entered into the database along with this information...
