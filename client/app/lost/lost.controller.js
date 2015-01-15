@@ -16,6 +16,10 @@ angular.module('lostPawsApp')
       socket.syncUpdates('pet', $scope.foundPets);
     });
 
+    $scope.deletePet = function(pet){
+      $http.delete('/api/pets/' + pet._id);
+    };
+
     $scope.$on('$destroy', function(){
       socket.unsyncUpdates('pet');
     });
