@@ -44,7 +44,7 @@ angular.module('lostPawsApp', [
     };
   })
 
-  .run(function ($rootScope, $location, Auth, Permission) {
+  .run(function ($rootScope, $location, Auth) {
     // Redirect to login if route requires auth and you're not logged in
     // HOW to have the route require auth???
     $rootScope.$on('$stateChangeStart', function (event, next) {
