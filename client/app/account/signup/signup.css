@@ -1,0 +1,14 @@
+@media(min-width:768px) {
+    header .container {
+        padding-top: 25px;
+        padding-bottom: 100px;
+    }
+
+    header .intro-text .name {
+        font-size: 4.75em;
+    }
+
+    header .intro-text .skills {
+        font-size: 1.75em;
+    }
+}

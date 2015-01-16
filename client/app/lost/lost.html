@@ -5,14 +5,16 @@
 <div class="container" id="everythingBelowNavbar">
   <div class="container" id="mainDisplay">
     <div class="row" id="petsMapArea">
+
+    
       <div class="col-lg-12" id="petSearch">
         <div class="findPet container row col-md-6 col-md-offset-3">
           <form id="findPetForm" ng-submit="findPet()">
-            <input type="text" class="form-control floating-label" ng-model="formInfo.location" placeholder="Enter Address/Zip Code to Find Your Lost Pet...">
-            <!-- <input type="submit" class="btn btn-primary btn-sm" ng-click="findPet()"> -->
+            <input type="text" class="form-control" ng-model="formInfo.location" placeholder="Enter Your Address/Zip Code to Find Your Lost Pet...">
           </form>
         </div> <!--class="findPet"-->
       </div> <!--id="petSearch"-->
+    
 
       <br><br>
 
@@ -35,10 +37,10 @@
     <div class="container col-md-12" id="petsTable">
       <div class="container row col-md-6 col-md-offset-3">
         <div id="foundPetsHeader">
-          <h1 class="page-header">Found Pets</h1>
+          <h1 class="page-header">Found Pets Database</h1>
         </div>
         <div id="foundPetsFilter">
-          <input type="text" class="form-control floating-label" ng-model="nameFilter" ng-model-options="{debounce: 300}" placeholder="Filter by Keyword...">
+          <input type="text" class="form-control" ng-model="nameFilter" ng-model-options="{debounce: 300}" placeholder="Filter by Keyword...">
         </div>
         <br>
       </div>
@@ -47,8 +49,8 @@
           <tr>
             <th>Pet Name</th>
             <th>Type of Pet</th>
-            <th>Color of Pet</th>
-            <th>Address Found</th>
+            <th>Color</th>
+            <th>Address Pet Found</th>
             <th>Date Found</th>
           </tr>
         </thead>
@@ -57,7 +59,7 @@
             <td>{{pet.name}}</td>
             <td>{{pet.type}}</td>
             <td>{{pet.color}}</td>
-            <td><h6>{{pet.address}}</h6></td>
+            <td>{{pet.addressFound}}</td>
             <td>{{pet.dateFound}}</td>
             <td><button type="button" class="close" ng-click="deletePet(pet)">&times;</button></td>         
           </tr>

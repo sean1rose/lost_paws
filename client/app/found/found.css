@@ -10,11 +10,15 @@ body{
   padding-bottom: 40px;
 }
 
+header .conatiner {
+  padding-top: 0px;
+}
+
 .titlefont {
     display: block;
-    color: white;
+    color: black;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 2em;
+    font-size: 3em;
     font-weight: 300;
 }
 

@@ -1,43 +1,42 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <h2>Please Register Before Submitting A Found Pet Into Our Database</h2>
-    </div>
-    <div class="col-sm-12">
-      <form class="form" name="form" ng-submit="register(form)" novalidate>
-        <!-- Name -->
-        <div id="username" class="form-group" ng-class="{ 'has-error' : form.name.$invalid && !form.name.$pristine }">
-          <!-- <label>Userame</label> -->
-          <input type="text" name="username" class="form-control" placeholder="Username" ng-model="user.name" ng-minlength="3" ng-maxlength="50" required>
-          <p ng-show="form.username.$error.minlength" class="help-block">Userame is too short.</p>
-          <p ng-show="form.username.$error.maxlength" class="help-block">Userame is too long.</p>
+<header id="foundHeader">
+  <div class="auth header_container">
+    <div class="container">
+      <div id="big-form" class="well auth-box">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2>Please Register</h2>
+            <h5>Before Submitting a Found Pet Into Our Database</h5>
+          </div>
+          <div class="col-sm-12">
+            <form class="form" name="form" ng-submit="register(form)" novalidate>
+              <!-- Name -->
+              <div id="username" class="form-group" ng-class="{ 'has-error' : form.name.$invalid && !form.name.$pristine }">
+                <!-- <label>Userame</label> -->
+                <input type="text" name="username" class="form-control" placeholder="Username" ng-model="user.name" ng-minlength="3" ng-maxlength="50" required>
+                <p ng-show="form.username.$error.minlength" class="help-block">Userame is too short.</p>
+                <p ng-show="form.username.$error.maxlength" class="help-block">Userame is too long.</p>
+              </div>
+              <!-- Project Email -->
+              <div id="email" class="form-group" ng-class="{ 'has-error' : form.email.$invalid && !form.email.$pristine }">
+                <!-- <label>Email Address</label> -->
+                <input type="email" name="email" class="form-control" placeholder="Email" ng-model="user.email">
+                <p ng-show="form.email.$invalid && !form.email.$pristine" class="help-block">Enter a valid email.</p>
+              </div>
+              <!-- Password -->
+              <div id="password" class="form-group" ng-class="{ 'has-error' : form.password.$invalid && !form.password.$pristine }">
+                <!-- <label>Password</label> -->
+                <input type="{{inputType}}" name="password" class="form-control" placeholder="Password" ng-model="user.password" ng-minlength="5" required>
+                <span ng-show="form.password.$error.minlength" class="help-block">Password must contain at least 5 characters.</span>
+              </div>
+              <input type="submit" value="Sign Up" class="btn btn-primary btn-sm" />
+              <p><a href="/login">Already Registered? LOGIN</a></p>
+            </form>
+          </div>
         </div>
-        <!-- Project Email -->
-        <div id="email" class="form-group" ng-class="{ 'has-error' : form.email.$invalid && !form.email.$pristine }">
-          <!-- <label>Email Address</label> -->
-          <input type="email" name="email" class="form-control" placeholder="Email" ng-model="user.email">
-          <p ng-show="form.email.$invalid && !form.email.$pristine" class="help-block">Enter a valid email.</p>
-        </div>
-        <!-- Password -->
-        <div id="password" class="form-group" ng-class="{ 'has-error' : form.password.$invalid && !form.password.$pristine }">
-          <!-- <label>Password</label> -->
-          <input type="{{inputType}}" name="password" class="form-control" placeholder="Password" ng-model="user.password" ng-minlength="5" required>
-          <span ng-show="form.password.$error.minlength" class="help-block">Password must contain at least 5 characters.</span>
-        </div>
-        <input type="submit" value="Sign Up" class="btn btn-primary btn-sm" />
         <hr>
-        <div>
-          <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
-            <i class="fa fa-facebook"></i> Connect with Facebook
-          </a>
-          <a class="btn btn-google-plus" href="" ng-click="loginOauth('google')">
-            <i class="fa fa-google-plus"></i> Connect with Google+
-          </a>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
-  <hr>
-</div>
+</header>
