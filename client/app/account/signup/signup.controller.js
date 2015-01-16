@@ -16,7 +16,8 @@ angular.module('lostPawsApp')
           password: $scope.user.password
         })
         .then( function() {
-          // Account created, redirect to home
+          // Account created, redirect to found
+          console.log('successfully registered.. should redirect to /found')
           $location.path('/found');
         })
         .catch( function(err) {

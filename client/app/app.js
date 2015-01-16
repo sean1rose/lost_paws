@@ -7,7 +7,8 @@ angular.module('lostPawsApp', [
   'btford.socket-io',
   'ui.router',
   'ui.bootstrap',
-  'uiGmapgoogle-maps'
+  'uiGmapgoogle-maps',
+  'permission'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
@@ -43,7 +44,7 @@ angular.module('lostPawsApp', [
     };
   })
 
-  .run(function ($rootScope, $location, Auth) {
+  .run(function ($rootScope, $location, Auth, Permission) {
     // Redirect to login if route requires auth and you're not logged in
     // HOW to have the route require auth???
     $rootScope.$on('$stateChangeStart', function (event, next) {
@@ -53,4 +54,8 @@ angular.module('lostPawsApp', [
         }
       });
     });
+
   });
+
+
+

@@ -6,6 +6,7 @@ angular.module('lostPawsApp')
       .state('found', {
         url: '/found',
         templateUrl: 'app/found/found.html',
-        controller: 'FoundCtrl'
+        controller: 'FoundCtrl',
+        authenticate: true
       });
   });
