@@ -16,7 +16,7 @@ angular.module('lostPawsApp')
         .then( function() {
           // Logged in, redirect to home
           // maybe redirect to 'found'? or perhaps redirect to 'lost,' even?
-          $location.path('/');
+          $location.path('/found');
         })
         .catch( function(err) {
           $scope.errors.other = err.message;
