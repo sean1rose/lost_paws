@@ -24,15 +24,6 @@ angular.module('lostPawsApp')
       socket.unsyncUpdates('pet');
     });
 
-    // default google maps 
-    // $scope.map = {
-    //   center: {
-    //     latitude: 37.7833,
-    //     longitude: -122.4167
-    //   },
-    //   zoom: 15,
-    //   bounds: {}
-    // };
 
     var latlng = new google.maps.LatLng(37.7833, -122.4167);
     
@@ -40,24 +31,60 @@ angular.module('lostPawsApp')
       zoom: 15,
       center: latlng
     };
+    
+    // initial Initialization of map
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+    var displayMap = function(standardAddress){
+      var geocoder = new google.maps.Geocoder();
+      // var mapOptions = {
+      //   center: { lat: latit, lng: longit},
+      //   zoom: 15
+      // }
+      geocoder.geocode( {'address': standardAddress}, function(results, status){
+        if (status == google.maps.GeocoderStatus.OK){
+          console.log('results are ', results);
+          map.setCenter(results[0].geometry.location);
+        } else {
+          console.log('map and geocoder did not display cuz ', status);
+        }
+      })
+    }
+
 
     // model for find pet search box (user inputs address/zip and map centers to that location)
     $scope.findPet = function(){
       var location = $scope.formInfo.location;
       $scope.formInfo.location = '';
-      gMapFactory.setAddress(location);
-      gMapFactory.callGMaps().then(function(data){
-        var petLatitude = data.results[0].geometry.location.lat;
-        var petLongitude = data.results[0].geometry.location.lng;
-        $scope.map = {
-          center: {
-            latitude: petLatitude,
-            longitude: petLongitude
-          },
-          zoom: 15
-        };
-      });
+
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode( { 'address': location}, function(results, status){
+        if (status == google.maps.GeocoderStatus.OK){
+          console.log('in the findPets geocoder');
+          var coordObj = results[0].geometry.location;
+          var lati = coordObj.D;
+          var longi = coordObj.k;
+          var regAddress = results[0].formatted_address;
+          console.log('address is ', regAddress);
+          displayMap(regAddress);
+        } else {
+          console.log('pet search failed!');
+        }
+      })
+
+
+      // gMapFactory.setAddress(location);
+      // gMapFactory.callGMaps().then(function(data){
+      //   var petLatitude = data.results[0].geometry.location.lat;
+      //   var petLongitude = data.results[0].geometry.location.lng;
+      //   $scope.map = {
+      //     center: {
+      //       latitude: petLatitude,
+      //       longitude: petLongitude
+      //     },
+      //     zoom: 15
+      //   };
+      // });
     };
 
     $scope.petMarkers = [];
@@ -90,6 +117,26 @@ angular.module('lostPawsApp')
                 position: results[0].geometry.location
               });
               console.log('marker is ', marker);
+            }
+          })
+        })
+      }
+      markerCreator(listOfPets);
+    });
+
+
+  });
+
+    // default google maps 
+    // $scope.map = {
+    //   center: {
+    //     latitude: 37.7833,
+    //     longitude: -122.4167
+    //   },
+    //   zoom: 15,
+    //   bounds: {}
+    // };
+
               // var obj = {
               //   latitude: petLatitude,
               //   longitude: petLongitude,
@@ -103,20 +150,13 @@ angular.module('lostPawsApp')
               //   }
               // };
               // console.log('obj IS ', obj);
-              $scope.$watch(function(){
-                return $scope.map.bounds;
-              }, function(){
-                var markers = [];
-                $scope.petMarkers.push(obj);
-                console.log('petMarkers IS ', $scope.petMarkers);
-              }, true);
-            }
-          })
-        })
-      }
-      markerCreator(listOfPets);
-    });
-
+              // $scope.$watch(function(){
+              //   return $scope.map.bounds;
+              // }, function(){
+              //   var markers = [];
+              //   $scope.petMarkers.push(obj);
+              //   console.log('petMarkers IS ', $scope.petMarkers);
+              // }, true);
 
     // // PURPOSE: display each pet in database to map + add markers/windows
     // // get the pet-database data from API, upon success...
@@ -159,6 +199,3 @@ angular.module('lostPawsApp')
     //   };
     //   markerCreator(listOfPets);
     // });
-
-
-  });
