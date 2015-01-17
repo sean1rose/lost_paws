@@ -30,6 +30,8 @@ angular.module('lostPawsApp')
       console.log('in service + callGMaps');
       makeUrl();
       var deferred = $q.defer();
+      
+      // cant get request the URL *HERE* after logging in - cros domain CORS issue / No Access-Control-Allow-Origin / SOP - Same Origin Policy
       $http.get(_finalUrl).success(function(data){
         console.log('data is ', data);
         deferred.resolve(data);
