@@ -37,24 +37,53 @@ angular.module('lostPawsApp')
       })
     };
 
-    geocodeService.markerCreator = function(arrayOfPets, map){
+    geocodeService.markerCreator = function(arrayOfPets, map, contentArray){
       var geocoder = new google.maps.Geocoder();
+
+      var infoWindow = new google.maps.InfoWindow();
+
       console.log('inside markerCreator service function, we have an array of pets from the db: ', arrayOfPets);
+
       arrayOfPets.forEach(function(item, index, array){
         var singlePet = item;
         var petName = singlePet.name;
         var petType = singlePet.type;
         var petDate = singlePet.dateFound;
+        var petFounder;
         var location = singlePet.addressFound;
+
+        var contentString = '<div id="content">'+
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<h1 id="firstHeading" class="firstHeading">' + petName +'</h1>'+
+          '<div id="bodyContent">'+
+          '<p>' + 'Breed: ' + '<b>' + petType + '</b>' + '</p>'+
+          '<p>' + 'Found: ' + petDate + '</p>'+
+          '<p>' + 'By: ' + petFounder + '</p>'
+          '</div>'+
+          '</div>';
+
+
         geocoder.geocode( { 'address': location}, function(results, status){
           if (status == google.maps.GeocoderStatus.OK){
             console.log('markerCreator service func status is A-OK, see: ', results);
             var regularAddress = results[0].formatted_address;
             var marker = new google.maps.Marker({
               map: map,
+              title: petName,
+              animation: google.maps.Animation.DROP,
               position: results[0].geometry.location
             });
             console.log('marker: ', marker);
+
+            //infowindow event
+            google.maps.event.addListener(marker, 'click', (function(marker, index){
+              return function(){
+                console.log('inside infowindo event listener!');
+                infoWindow.setContent(contentString);
+                infoWindow.open(map, marker);
+              }
+            })(marker, index));
           }
         })
       })
