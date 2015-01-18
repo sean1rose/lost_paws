@@ -9,6 +9,7 @@ var UserSchema = new Schema({
   name: String,
   email: { type: String, lowercase: true },
   contact: String,
+  foundPet: [{ type: Schema.Types.ObjectId, ref: 'Pet'}],
   role: {
     type: String,
     default: 'user'

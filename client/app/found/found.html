@@ -1,67 +1,89 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <header id="foundHeader">
-  <div class="container auth">
-      <p><h1 class="text-center titlefont">Find a Lost Pet?</h1></p>
-      <p><h2 class="text-center">Enter the pet's information so we can connect you with its rightful owner</h2></p>
+  <div class="auth header_container">
+    <div class="container">
+    <p><h1 class="text-center titlefont">Find a Lost Pet?</h1></p>
+    <p><h2 class="text-center">Answer a few short questions so we can connect you with the pet's rightful owner</h2></p>
       <div id="big-form" class="well auth-box">
-        <form class="pet-form" name="FoundPetForm">
-          <fieldset>
-
-            <!-- Pet's Name-->
-            <div class="form-group">
-              <label class=" control-label" for="textinput">Pet's Name</label>  
-              <div class="">
-                <input type="text" class="form-control" placeholder="Name of Pet" name="petName" ng-model="foundPet.name">
+        <div class="row">
+          <div class="col-sm-12">
+          </div>
+          <br>
+          <div class="col-sm-12">
+            <form class="form" name="form" ng-submit="addPet(form)" novalidate>
+              <!-- Pet's Name -->
+              <div id="name" class="form-group" ng-class="{ 'has-error' : form.name.$invalid && !form.name.$pristine }">
+                <label>Pet's Name:</label>
+                <input type="text" name="name" class="form-control" placeholder="Pet's name" ng-model="foundPet.name" ng-minlength="3" ng-maxlength="12" required>
+                <p ng-show="form.name.$error.minlength" class="help-block">Pet's name is too short.</p>
+                <p ng-show="form.name.$error.maxlength" class="help-block">Pet's name is too long.</p>
               </div>
-            </div>
 
-            <!-- Pet Type/Breed-->
-            <div class="form-group">
-              <label class=" control-label" for="pettype">Pet Type/Breed</label>
-              <div class="">
-                <input type="text" class="form-control" placeholder="Type of Pet/Breed" name="petType" ng-model="foundPet.type">
+              <!-- Pet Type -->
+              <div id="type" class="form-group" ng-class="{ 'has-error' : form.type.$invalid && !form.type.$pristine }">
+                <label>Breed/Type:</label>
+                <input type="text" name="type" class="form-control" placeholder="Type/Breed of pet" ng-model="foundPet.type" ng-minlength="3" ng-maxlength="20" required>
+                <p ng-show="form.type.$error.minlength" class="help-block">Pet's type is too short.</p>
+                <p ng-show="form.type.$error.maxlength" class="help-block">Pet's type is too long.</p>
               </div>
-            </div>
 
-            <!-- Pet Color-->
-            <div class="form-group">
-              <label class=" control-label" for="petcolor">Pet Color</label>
-              <div class="">
-                <input type="text" class="form-control" placeholder="Color of Pet" name="petColor" ng-model="foundPet.color">
+              <!-- Pet Color -->
+              <div id="color" class="form-group" ng-class="{ 'has-error' : form.color.$invalid && !form.color.$pristine }">
+                <label>Color:</label>
+                <input type="text" name="color" class="form-control" placeholder="Color of pet" ng-model="foundPet.color" ng-minlength="3" ng-maxlength="20" required>
+                <p ng-show="form.color.$error.minlength" class="help-block">Pet's color is too short.</p>
+                <p ng-show="form.color.$error.maxlength" class="help-block">Pet's color is too long.</p>
               </div>
-            </div>
 
-            <!-- Pet Address-->
-            <div class="form-group">
-              <label class=" control-label" for="petaddress">Address/Zip Code Pet Was Found</label>
-              <div class="">
-                <input type="text" class="form-control" placeholder="Address Pet Found" name="petAddress" ng-model="foundPet.address">
+              <!-- Pet Address -->
+              <div id="address" class="form-group" ng-class="{ 'has-error' : form.address.$invalid && !form.address.$pristine }">
+                <label>Address/Zip Code Found:</label>
+                <input type="text" name="address" class="form-control" placeholder="Address pet found" ng-model="foundPet.address" ng-minlength="5" ng-maxlength="50" required>
+                <p ng-show="form.address.$error.minlength" class="help-block">Pet's address is too short.</p>
+                <p ng-show="form.address.$error.maxlength" class="help-block">Pet's address is too long.</p>
               </div>
-            </div>
 
-            <!-- Date Found-->
-            <div class="form-group">
-              <label class=" control-label" for="datefound">Date Found</label>
-              <div class="">
-                <input type="text" class="form-control" placeholder="Date Pet Found" name="dateFound" ng-model="foundPet.dateFound">
+              <!-- Date Found -->
+              <div id="dateFound" class="form-group" ng-class="{ 'has-error' : form.dateFound.$invalid && !form.dateFound.$pristine }">
+                <label>Date Found:</label>
+                <input type="text" name="dateFound" class="form-control" placeholder="Date pet found" ng-model="foundPet.dateFound" ng-minlength="3" ng-maxlength="20" required>
+                <p ng-show="form.dateFound.$error.minlength" class="help-block">Date Found is too short.</p>
+                <p ng-show="form.dateFound.$error.maxlength" class="help-block">Date Found is too long.</p>
               </div>
-            </div>
 
-            <!-- File Button for Uploading Picture of Found Pet --> 
-            <div class="form-group">
-              <label class=" control-label" for="filebutton">Upload Found Pet Image</label>
-              <div class="">
-                <input id="filebutton" name="filebutton" class="input-file" type="file">
+              <!-- Found By -->
+              <div id="foundBy" class="form-group" ng-class="{ 'has-error' : form.foundBy.$invalid && !form.foundBy.$pristine }">
+                <label>Pet Found By:</label>
+                <input type="text" name="foundBy" class="form-control" placeholder="Pet found by" ng-model="foundPet.foundBy" ng-minlength="3" ng-maxlength="20" required>
+                <p ng-show="form.foundBy.$error.minlength" class="help-block">Found By is too short.</p>
+                <p ng-show="form.foundBy.$error.maxlength" class="help-block">Found By is too long.</p>
               </div>
-            </div>
 
-            <button type="submit" class="btn btn-primary" ng-click="addPet()">Add Found Pet</button>
+              <!-- Contact Info -->
+              <div id="finderContact" class="form-group" ng-class="{ 'has-error' : form.finderContact.$invalid && !form.finderContact.$pristine }">
+                <label>Contact Info:</label>
+                <input type="text" name="finderContact" class="form-control" placeholder="Contact info that pet owner can reach you at" ng-model="foundPet.finderContact" ng-minlength="7" ng-maxlength="30" required>
+                <p ng-show="form.finderContact.$error.minlength" class="help-block">Contact Information is too short.</p>
+                <p ng-show="form.finderContact.$error.maxlength" class="help-block">Contact Information is too long.</p>
+              </div>
 
-          </fieldset>
-        </form>
+              <!-- File Button for Uploading Picture of Found Pet --> 
+              <div class="form-group">
+                <label class=" control-label" for="filebutton">Upload Found Pet Image</label>
+                <div class="">
+                  <input id="filebutton" name="filebutton" class="input-file" type="file">
+                </div>
+              </div>
+
+              <input type="submit" value="Add Found Pet" class="btn btn-primary"/>
+              <!-- <button type="submit" ng-click="addPet()" class="btn btn-primary">Add Found Pet</button> -->
+            </form>
+          </div>
+        </div>
+        <hr>
       </div>
-    <div class="clearfix"></div>
+    </div>
   </div>
 </header>
 

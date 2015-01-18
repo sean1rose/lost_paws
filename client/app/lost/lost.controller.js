@@ -48,6 +48,7 @@ angular.module('lostPawsApp')
     $http.get('/api/pets').success(function(foundPets){
       $scope.foundPets = foundPets;
       var listOfPets = $scope.foundPets;
+      console.log('LOOK HERE! ---> ', listOfPets[0].name)
       gMapFactory.markerCreator(listOfPets, map);
     });
 

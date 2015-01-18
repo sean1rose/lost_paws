@@ -5,6 +5,7 @@ angular.module('lostPawsApp')
     $scope.user = {};
     $scope.errors = {};
     $scope.inputType = 'password';
+    
 
     $scope.register = function(form) {
       $scope.submitted = true;

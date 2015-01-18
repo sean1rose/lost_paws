@@ -12,3 +12,11 @@
         font-size: 1.75em;
     }
 }
+
+.help-block {
+    color: red;
+}
+
+.auth form .help-block {
+    color: red;
+}
