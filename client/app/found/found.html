@@ -3,14 +3,14 @@
 <header id="foundHeader">
   <div class="container auth">
       <p><h1 class="text-center titlefont">Find a Lost Pet?</h1></p>
-      <p><h2 class="text-center">Enter the pet's information so we can connect you with its rightful owner</h2></p>
+      <p><h2 class="text-center">Answer a few short questions so we can connect you with the pet's rightful owner</h2></p>
       <div id="big-form" class="well auth-box">
         <form class="pet-form" name="FoundPetForm">
           <fieldset>
 
             <!-- Pet's Name-->
             <div class="form-group">
-              <label class=" control-label" for="textinput">Pet's Name</label>  
+              <label class=" control-label" for="textinput">Pet's Name:</label>  
               <div class="">
                 <input type="text" class="form-control" placeholder="Name of Pet" name="petName" ng-model="foundPet.name">
               </div>
@@ -18,7 +18,7 @@
 
             <!-- Pet Type/Breed-->
             <div class="form-group">
-              <label class=" control-label" for="pettype">Pet Type/Breed</label>
+              <label class=" control-label" for="pettype">Breed/Type:</label>
               <div class="">
                 <input type="text" class="form-control" placeholder="Type of Pet/Breed" name="petType" ng-model="foundPet.type">
               </div>
@@ -26,7 +26,7 @@
 
             <!-- Pet Color-->
             <div class="form-group">
-              <label class=" control-label" for="petcolor">Pet Color</label>
+              <label class=" control-label" for="petcolor">Color:</label>
               <div class="">
                 <input type="text" class="form-control" placeholder="Color of Pet" name="petColor" ng-model="foundPet.color">
               </div>
@@ -34,7 +34,7 @@
 
             <!-- Pet Address-->
             <div class="form-group">
-              <label class=" control-label" for="petaddress">Address/Zip Code Pet Was Found</label>
+              <label class=" control-label" for="petaddress">Address/Zip Code Found:</label>
               <div class="">
                 <input type="text" class="form-control" placeholder="Address Pet Found" name="petAddress" ng-model="foundPet.address">
               </div>
@@ -42,9 +42,25 @@
 
             <!-- Date Found-->
             <div class="form-group">
-              <label class=" control-label" for="datefound">Date Found</label>
+              <label class=" control-label" for="datefound">Date Found:</label>
               <div class="">
                 <input type="text" class="form-control" placeholder="Date Pet Found" name="dateFound" ng-model="foundPet.dateFound">
+              </div>
+            </div>
+
+            <!-- Found By -->
+            <div class="form-group">
+              <label class=" control-label" for="foundby">Pet Found By:</label>
+              <div class="">
+                <input type="text" class="form-control" placeholder="Pet Found By" name="foundBy" ng-model="foundPet.foundBy">
+              </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="form-group">
+              <label class=" control-label" for="finderContact">Contact Info:</label>
+              <div class="">
+                <input type="text" class="form-control" placeholder="Phone Number/Email Pet Owner Can Reach You At" name="finderContact" ng-model="foundPet.finderContact">
               </div>
             </div>
 

@@ -9,11 +9,12 @@ var PetSchema = new Schema({
   color: String,
   addressFound: String,
   dateFound: String,
+  foundBy: String,
+  finderContact: String,
   finder: {
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  finderContact: String,
   owner: {
     type: Schema.Types.ObjectId,
     ref: 'User'
