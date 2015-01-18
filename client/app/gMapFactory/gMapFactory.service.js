@@ -48,6 +48,7 @@ angular.module('lostPawsApp')
         var singlePet = item;
         var petName = singlePet.name;
         var petType = singlePet.type;
+        var petColor = singlePet.color;
         var petDate = singlePet.dateFound;
         var petFounder = singlePet.foundBy;
         var petContact = singlePet.finderContact;
@@ -59,8 +60,9 @@ angular.module('lostPawsApp')
           '<h1 id="firstHeading" class="firstHeading">' + petName +'</h1>'+
           '<div id="bodyContent">'+
           '<p>' + 'Breed: ' + '<b>' + petType + '</b>' + '</p>'+
+          '<p>' + 'Color: ' + '<b>' + petColor + '</b>' + '</p>'+
           '<p>' + 'Found By: ' + '<b>' + petFounder + '</b>' + '</p>'+
-          '<p>' + 'Contact: ' + petContact + '</p>'
+          '<p>' + 'Contact: ' + '<b>' + petContact + '</b>' + '</p>'
           '</div>'+
           '</div>';
 
