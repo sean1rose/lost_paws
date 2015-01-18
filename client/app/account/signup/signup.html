@@ -14,9 +14,9 @@
               <!-- Name -->
               <div id="username" class="form-group" ng-class="{ 'has-error' : form.name.$invalid && !form.name.$pristine }">
                 <!-- <label>Userame</label> -->
-                <input type="text" name="username" class="form-control" placeholder="Username" ng-model="user.name" ng-minlength="3" ng-maxlength="50" required>
-                <p ng-show="form.username.$error.minlength" class="help-block">Userame is too short.</p>
-                <p ng-show="form.username.$error.maxlength" class="help-block">Userame is too long.</p>
+                <input type="text" name="username" class="form-control" placeholder="Name" ng-model="user.name" ng-minlength="3" ng-maxlength="50" required>
+                <p ng-show="form.username.$error.minlength" class="help-block">Name is too short.</p>
+                <p ng-show="form.username.$error.maxlength" class="help-block">Name is too long.</p>
               </div>
               <!-- Project Email -->
               <div id="email" class="form-group" ng-class="{ 'has-error' : form.email.$invalid && !form.email.$pristine }">

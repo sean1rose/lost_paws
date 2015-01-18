@@ -59,7 +59,7 @@ angular.module('lostPawsApp')
           '<h1 id="firstHeading" class="firstHeading">' + petName +'</h1>'+
           '<div id="bodyContent">'+
           '<p>' + 'Breed: ' + '<b>' + petType + '</b>' + '</p>'+
-          '<p>' + 'By: ' + '<b>' + petFounder + '</b>' + '</p>'+
+          '<p>' + 'Found By: ' + '<b>' + petFounder + '</b>' + '</p>'+
           '<p>' + 'Contact: ' + petContact + '</p>'
           '</div>'+
           '</div>';
